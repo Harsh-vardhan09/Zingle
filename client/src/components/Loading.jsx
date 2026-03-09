@@ -1,0 +1,13 @@
+import React from 'react'
+
+const Loading = ({height="100"}) => {
+  return (
+    <section style={{height}}className='flex item-center justify-center h-screen'>
+        <div className='w-10 h-10 rounded-full border-3 border-purple-500 border-t-transparent animate-spin'>
+
+        </div>
+    </section>
+  )
+}
+
+export default Loading
