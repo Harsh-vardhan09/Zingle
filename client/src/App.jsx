@@ -2,12 +2,14 @@ import React from 'react'
 import {Route, Routes} from 'react-router-dom'
 import { ChatBox, Connections, CreatePost, Discover, Feed, Login, Messages, Profile,Layout } from './pages'
 import {useUser} from '@clerk/react';
+import {Toaster} from 'react-hot-toast'
 
 
 const App = () => {
   const {user} =useUser();
   return (
     <>
+    <Toaster/>
       <Routes>
         <Route path='/' element={!user?<Login/>:<Layout/>}>
             <Route index element={<Feed/>}/>
