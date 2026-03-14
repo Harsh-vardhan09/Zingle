@@ -12,16 +12,17 @@
 ## 🛠️ Tech Stack
 
 ### Client side
-- React js(vite)
-- Tailwind css
+- React JS (VITE)
+- Tailwind CSS
 - Clerk
 - moment
+- React-hot-toast
 ### Server side
-- Node js
-- express js
+- Node JS
+- express JS
 - MongoDB
-- Cloudinary
-- cors
+- CLOUDINARY
+- CORS
 
 
 
@@ -104,6 +105,35 @@ Zingle/
 - Its an npm package that lets us show time in the format from now
 	` moment(story.createdAt).fromNow()`
 
+#### React-hot-toast:
+- Add beautiful notifications to your React app with [react-hot-toast](https://github.com/timolins/react-hot-toast).
+- `npm i react-hot-toast`
+- put `<Toaster/>` in app.jsx
+- then we can use toast with promise
+```jsx
+onClick={()=>toast.promise(handleCreateStory(),{
+            loading:'Saving...',
+            success:<p>story Added</p>,
+            error:e=><p>{e.message}</p>
+        })}
+```
+
+---
+
+#### Important:-
+- *Here the `media.type` is the MIME type it can be anything image video null. `?` allows if it null it doesn't crash.*
+- *If the mime type starts with image like `image/png` , `image/jpeg` it gives true.*
+```jsx
+(media?.type.startswith("image") ? (
+              <img
+                src={previewUrl}
+                alt=""
+                className="object-contain max-h-full"
+              />
+            ) : (
+              <video src={previewUrl} className="object-contain max-h-full" />
+            ))
+```
 
 ---
 #### Author
