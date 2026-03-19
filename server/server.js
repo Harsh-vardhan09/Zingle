@@ -6,7 +6,7 @@ import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js"
 const app=express();
 await connectDb();
-
+const PORT=process.env.PORT| '8080';
 
 app.use(express.json());
 app.use(cors())
@@ -18,7 +18,7 @@ app.get('/',(req,res)=>{
 
 app.use('/api/inngest',serve({ client: inngest, functions }))
 
-app.listen(process.env.PORT,()=>{
-    console.log(`server is running at http://localhost:${process.env.PORT}`);
+app.listen(PORT,()=>{
+    console.log(`server is running at http://localhost:${PORT}`);
     
 })
