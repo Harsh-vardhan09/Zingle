@@ -27,7 +27,7 @@ const syncUserCreation=inngest.createFunction(
         }
        await User.create(userData)
         // console.log(userIn);
-        
+        console.log("EVENT RECEIVED:", event);
     }
 )
 
@@ -39,11 +39,11 @@ const syncUserUpdation=inngest.createFunction(
         const {id,first_name,last_name,email_addresses,image_url}=event.data
       
       const updateUserData={
-        email:email_addresses[0].email.address,
+        email:email_addresses[0].email_address,
         full_name:first_name+" "+last_name,
       }
         await User.findIdAndUpdate(id,updateUserData)
-        
+        console.log("EVENT RECEIVED:", event);
     }
 )
 
@@ -55,7 +55,7 @@ const syncUserDeletion=inngest.createFunction(
         const {id}=event.data
       
         await User.findIdAndDelete(id)
-        
+        console.log("EVENT RECEIVED:", event);
 
     }
 )
