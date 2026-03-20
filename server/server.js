@@ -6,7 +6,7 @@ import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js"
 const app=express();
 await connectDb();
-const PORT=process.env.PORT| '8080';
+const PORT=process.env.PORT|| '8080';
 
 app.use(express.json());
 app.use(cors())
