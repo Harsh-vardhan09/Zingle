@@ -6,8 +6,10 @@ export const inngest = new Inngest({ id: "zingle-app" });
 
 //ingest func to save user data to a database
 const syncUserCreation = inngest.createFunction(
-  { id: "sync-user-from-clerk" },
-  { event: "clerk/user.created" },
+  {
+    id: "sync-user-from-clerk-v2",
+    triggers: { event: "user.created" },
+  },
   async ({ event }) => {
     const { id, first_name, last_name, email_addresses, image_url } =
       event.data;
@@ -34,8 +36,10 @@ const syncUserCreation = inngest.createFunction(
 
 //ingest function to update user in the database
 const syncUserUpdation = inngest.createFunction(
-  { id: "update-user-from-clerk" },
-  {  event: "clerk/user.updated"},
+  {
+    id: "update-user-from-clerk-v2",
+    triggers: { event: "user.updated" },
+  },
   async ({ event }) => {
     const { id, first_name, last_name, email_addresses, image_url } =
       event.data;
@@ -51,8 +55,10 @@ const syncUserUpdation = inngest.createFunction(
 
 //ingest function to delete user in the database
 const syncUserDeletion = inngest.createFunction(
-  { id: "delete-user-from-clerk" },
-  { event: "clerk/user.deleted"  },
+  {
+    id: "delete-user-from-clerk-v2",
+    triggers: { event: "user.deleted" },
+  },
   async ({ event }) => {
     const { id } = event.data;
 
