@@ -7,6 +7,8 @@ import {Toaster} from 'react-hot-toast'
 
 const App = () => {
   const {user} =useUser();
+  console.log(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
+  
   return (
     <>
     <Toaster/>
