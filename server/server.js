@@ -4,13 +4,19 @@ import 'dotenv/config'
 import connectDb from './configs/db.js';
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js"
+import { clerkMiddleware } from '@clerk/express'
+
 const app=express();
 await connectDb();
+
+
 const PORT=process.env.PORT|| '8080';
 // const Development=process.env.NODE;
 
 app.use(express.json());
 app.use(cors())
+app.use(clerkMiddleware());
+
 
 
 app.get('/',(req,res)=>{
