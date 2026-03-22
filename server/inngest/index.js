@@ -1,5 +1,7 @@
 import { Inngest } from "inngest";
 import User from "../models/User.js";
+import Connection from "../models/connection.js";
+import sendEmail from "../configs/nodeMailer.js";
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "zingle-app" });
@@ -67,5 +69,90 @@ const syncUserDeletion = inngest.createFunction(
   },
 );
 
+// INNGEST FUNSTION TO SEND REMAILDER WHEN A NEW CONNECTION REQUEST IS ADDED
+const sendnewConnectionRequestReminder = inngest.createFunction(
+  {
+    id: "send-new-connection-request-reminder",
+    triggers: { event: "app/connection-request" },
+  },
+  async ({ event, step }) => {
+    const { connectionId } = event.data;
+
+    await step.run("send-connection-request-mail", async () => {
+      const connection =
+        await Connection.findById(connectionId).populate("from_user_id");
+      const subject = `New Connection Request`;
+      const body = `
+            <div style="font-family: Arial, sans-serif; padding: 20px;">
+                <h2>Hi ${connection.to_user_id.full_name},</h2>
+                <p>
+                  You have a new connection request from 
+                  ${connection.from_user_id.full_name} 
+                  (@${connection.from_user_id.username}).
+                </p>
+                <p>
+                  <a href="${process.env.FRONTEND_URL}/connections" style="color: #10b981;">
+                    View request
+                  </a>
+                </p>
+                <p>
+                  Thanks,<br/>
+                  Zingle - Stay Connected
+                </p>
+            </div> `;
+
+      await sendEmail({
+        to: connection.to_user_id.email,
+        subject,
+        body,
+      });
+    });
+
+    const in24Hour = new Date(Date.now() + 24 * 60 * 0 * 1000);
+
+    await step.sleepUntil("wait for 24 hours", in24Hour);
+    await step.run(`send-connection-request-reminder`, async () => {
+      const connection = await Connection.findById(connectionId).populate(
+        "from_user_id to_user_id",
+      );
+
+      if (connection.status === "accepted") {
+        return { message: "alredy accepted" };
+      }
+      const subject = `New Connection Request`;
+      const body = `
+            <div style="font-family: Arial, sans-serif; padding: 20px;">
+                <h2>Hi ${connection.to_user_id.full_name},</h2>
+                <p>
+                  You have a new connection request from 
+                  ${connection.from_user_id.full_name} 
+                  (@${connection.from_user_id.username}).
+                </p>
+                <p>
+                  <a href="${process.env.FRONTEND_URL}/connections" style="color: #10b981;">
+                    View request
+                  </a>
+                </p>
+                <p>
+                  Thanks,<br/>
+                  Zingle - Stay Connected
+                </p>
+            </div> `;
+
+      await sendEmail({
+        to: connection.to_user_id.email,
+        subject,
+        body,
+      });
+      return { message: "reminder sent" };
+    });
+  },
+);
+
 // Create an empty array where we'll export future Inngest functions
-export const functions = [syncUserCreation, syncUserUpdation, syncUserDeletion];
+export const functions = [
+  syncUserCreation,
+  syncUserUpdation,
+  syncUserDeletion,
+  sendnewConnectionRequestReminder,
+];

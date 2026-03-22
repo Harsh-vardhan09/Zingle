@@ -1,13 +1,20 @@
 import React from 'react'
 import {Route, Routes} from 'react-router-dom'
 import { ChatBox, Connections, CreatePost, Discover, Feed, Login, Messages, Profile,Layout } from './pages'
-import {useUser} from '@clerk/react';
+import {useUser, useAuth} from '@clerk/react';
 import {Toaster} from 'react-hot-toast'
+import { useEffect } from 'react';
 
 
 const App = () => {
   const {user} =useUser();
-  console.log(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
+  // console.log(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
+  const {getToken}=useAuth();
+  useEffect(()=>{
+    if(user){
+      getToken().then((token)=>console.log(token))
+    }
+  },[user])
   
   return (
     <>
