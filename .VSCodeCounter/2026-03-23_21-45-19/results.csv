@@ -1,0 +1,58 @@
+"filename", "language", "JSON", "JavaScript", "Markdown", "JavaScript JSX", "PostCSS", "HTML", "XML", "comment", "blank", "total"
+"d:\Social-Media\README.md", "Markdown", 0, 0, 125, 0, 0, 0, 0, 0, 16, 141
+"d:\Social-Media\client\eslint.config.js", "JavaScript", 0, 28, 0, 0, 0, 0, 0, 0, 2, 30
+"d:\Social-Media\client\index.html", "HTML", 0, 0, 0, 0, 0, 13, 0, 0, 1, 14
+"d:\Social-Media\client\package-lock.json", "JSON", 3622, 0, 0, 0, 0, 0, 0, 0, 1, 3623
+"d:\Social-Media\client\package.json", "JSON", 34, 0, 0, 0, 0, 0, 0, 0, 1, 35
+"d:\Social-Media\client\src\App.jsx", "JavaScript JSX", 0, 0, 0, 33, 0, 0, 0, 1, 5, 39
+"d:\Social-Media\client\src\assets\assets.js", "JavaScript", 0, 282, 0, 0, 0, 0, 0, 2, 14, 298
+"d:\Social-Media\client\src\assets\favicon.svg", "XML", 0, 0, 0, 0, 0, 0, 4, 0, 1, 5
+"d:\Social-Media\client\src\assets\react.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 1
+"d:\Social-Media\client\src\components\Loading.jsx", "JavaScript JSX", 0, 0, 0, 10, 0, 0, 0, 0, 4, 14
+"d:\Social-Media\client\src\components\MenuItems.jsx", "JavaScript JSX", 0, 0, 0, 18, 0, 0, 0, 0, 3, 21
+"d:\Social-Media\client\src\components\PostCard.jsx", "JavaScript JSX", 0, 0, 0, 49, 0, 0, 0, 4, 12, 65
+"d:\Social-Media\client\src\components\ProfileModal.jsx", "JavaScript JSX", 0, 0, 0, 73, 0, 0, 0, 2, 13, 88
+"d:\Social-Media\client\src\components\Sidebar.jsx", "JavaScript JSX", 0, 0, 0, 34, 0, 0, 0, 0, 6, 40
+"d:\Social-Media\client\src\components\StoriesBar.jsx", "JavaScript JSX", 0, 0, 0, 58, 0, 0, 0, 4, 10, 72
+"d:\Social-Media\client\src\components\StoryModal.jsx", "JavaScript JSX", 0, 0, 0, 86, 0, 0, 0, 0, 9, 95
+"d:\Social-Media\client\src\components\StoryViewer.jsx", "JavaScript JSX", 0, 0, 0, 72, 0, 0, 0, 5, 17, 94
+"d:\Social-Media\client\src\components\UserCard.jsx", "JavaScript JSX", 0, 0, 0, 42, 0, 0, 0, 2, 12, 56
+"d:\Social-Media\client\src\components\UserProfileInfo.jsx", "JavaScript JSX", 0, 0, 0, 57, 0, 0, 0, 2, 8, 67
+"d:\Social-Media\client\src\index.css", "PostCSS", 0, 0, 0, 0, 14, 0, 0, 2, 6, 22
+"d:\Social-Media\client\src\main.jsx", "JavaScript JSX", 0, 0, 0, 17, 0, 0, 0, 0, 3, 20
+"d:\Social-Media\client\src\pages\ChatBox.jsx", "JavaScript JSX", 0, 0, 0, 87, 0, 0, 0, 1, 6, 94
+"d:\Social-Media\client\src\pages\Connections.jsx", "JavaScript JSX", 0, 0, 0, 100, 0, 0, 0, 3, 15, 118
+"d:\Social-Media\client\src\pages\CreatePost.jsx", "JavaScript JSX", 0, 0, 0, 67, 0, 0, 0, 5, 9, 81
+"d:\Social-Media\client\src\pages\Discover.jsx", "JavaScript JSX", 0, 0, 0, 49, 0, 0, 0, 2, 10, 61
+"d:\Social-Media\client\src\pages\Feed.jsx", "JavaScript JSX", 0, 0, 0, 43, 0, 0, 0, 2, 10, 55
+"d:\Social-Media\client\src\pages\Layout.jsx", "JavaScript JSX", 0, 0, 0, 26, 0, 0, 0, 0, 4, 30
+"d:\Social-Media\client\src\pages\Login.jsx", "JavaScript JSX", 0, 0, 0, 32, 0, 0, 0, 3, 5, 40
+"d:\Social-Media\client\src\pages\Messages.jsx", "JavaScript JSX", 0, 0, 0, 39, 0, 0, 0, 2, 8, 49
+"d:\Social-Media\client\src\pages\Profile.jsx", "JavaScript JSX", 0, 0, 0, 71, 0, 0, 0, 7, 9, 87
+"d:\Social-Media\client\src\pages\RecentMessages.jsx", "JavaScript JSX", 0, 0, 0, 38, 0, 0, 0, 0, 6, 44
+"d:\Social-Media\client\src\pages\index.js", "JavaScript", 0, 20, 0, 0, 0, 0, 0, 0, 3, 23
+"d:\Social-Media\client\vercel.json", "JSON", 8, 0, 0, 0, 0, 0, 0, 0, 0, 8
+"d:\Social-Media\client\vite.config.js", "JavaScript", 0, 9, 0, 0, 0, 0, 0, 1, 4, 14
+"d:\Social-Media\server\configs\db.js", "JavaScript", 0, 10, 0, 0, 0, 0, 0, 0, 2, 12
+"d:\Social-Media\server\configs\multer.js", "JavaScript", 0, 3, 0, 0, 0, 0, 0, 0, 2, 5
+"d:\Social-Media\server\configs\nodeMailer.js", "JavaScript", 0, 20, 0, 0, 0, 0, 0, 1, 5, 26
+"d:\Social-Media\server\controllers\connectionController.js", "JavaScript", 0, 122, 0, 0, 0, 0, 0, 5, 20, 147
+"d:\Social-Media\server\controllers\postController.js", "JavaScript", 0, 105, 0, 0, 0, 0, 0, 5, 14, 124
+"d:\Social-Media\server\controllers\storyController.js", "JavaScript", 0, 73, 0, 0, 0, 0, 0, 6, 16, 95
+"d:\Social-Media\server\controllers\userController.js", "JavaScript", 0, 197, 0, 0, 0, 0, 0, 12, 33, 242
+"d:\Social-Media\server\inngest\index.js", "JavaScript", 0, 151, 0, 0, 0, 0, 0, 9, 19, 179
+"d:\Social-Media\server\middleware\auth.js", "JavaScript", 0, 17, 0, 0, 0, 0, 0, 0, 1, 18
+"d:\Social-Media\server\models\Connection.js", "JavaScript", 0, 8, 0, 0, 0, 0, 0, 0, 4, 12
+"d:\Social-Media\server\models\Message.js", "JavaScript", 0, 4, 0, 0, 0, 0, 0, 0, 2, 6
+"d:\Social-Media\server\models\Post.js", "JavaScript", 0, 16, 0, 0, 0, 0, 0, 0, 4, 20
+"d:\Social-Media\server\models\Story.js", "JavaScript", 0, 17, 0, 0, 0, 0, 0, 0, 3, 20
+"d:\Social-Media\server\models\User.js", "JavaScript", 0, 19, 0, 0, 0, 0, 0, 0, 3, 22
+"d:\Social-Media\server\package-lock.json", "JSON", 4248, 0, 0, 0, 0, 0, 0, 0, 1, 4249
+"d:\Social-Media\server\package.json", "JSON", 28, 0, 0, 0, 0, 0, 0, 0, 1, 29
+"d:\Social-Media\server\routes\connectionRouter.js", "JavaScript", 0, 8, 0, 0, 0, 0, 0, 0, 3, 11
+"d:\Social-Media\server\routes\postRoutes.js", "JavaScript", 0, 9, 0, 0, 0, 0, 0, 0, 4, 13
+"d:\Social-Media\server\routes\storyRoutes.js", "JavaScript", 0, 8, 0, 0, 0, 0, 0, 0, 3, 11
+"d:\Social-Media\server\routes\userRoutes.js", "JavaScript", 0, 12, 0, 0, 0, 0, 0, 0, 6, 18
+"d:\Social-Media\server\server.js", "JavaScript", 0, 26, 0, 0, 0, 0, 0, 1, 13, 40
+"d:\Social-Media\server\vercel.json", "JSON", 20, 0, 0, 0, 0, 0, 0, 0, 0, 20
+"Total", "-", 7960, 1164, 125, 1101, 14, 13, 5, 89, 392, 10863
