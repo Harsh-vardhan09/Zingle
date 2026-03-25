@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { useAuth } from "@clerk/react"
-import { fetchConnections } from "../features/connections/connectionSlice"
+import { fetchConnections } from "../features/connections/connectionSlice.js"
 import toast, {} from 'react-hot-toast'
-import api from "../api/axios"
+import api from "../api/axios.js"
 const Connections = () => {
 
   const [currentTab,setCurrentTab]=useState('followers')

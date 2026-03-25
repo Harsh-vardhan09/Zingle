@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { assets, dummyPostsData } from '../assets/assets';
+import { assets, dummyPostsData } from '../assets/assets.js';
 import { Section } from 'lucide-react';
 import Loading from '../components/Loading';
 import StoriesBar from '../components/StoriesBar';
 import PostCard from '../components/PostCard';
 import RecentMessages from './RecentMessages';
 import { useAuth } from '@clerk/react';
-import api from '../api/axios';
+import api from '../api/axios.js';
 import toast from 'react-hot-toast';
 
 const Feed = () => {

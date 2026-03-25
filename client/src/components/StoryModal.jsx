@@ -2,7 +2,7 @@ import { useAuth } from "@clerk/react";
 import { ArrowLeft, Sparkle, TextIcon, Upload } from "lucide-react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import api from "../api/axios";
+import api from "../api/axios.js";
 
 const StoryModal = ({ setShowModal, fetchStories }) => {
   const bgColors = ["#4f46e5", "#db2777", "#e11d48", "#ca8a04", "#0d9488"];

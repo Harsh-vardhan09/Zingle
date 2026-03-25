@@ -6,7 +6,7 @@ import StoryModal from "./StoryModal";
 import StoryViewer from "./StoryViewer";
 import { useAuth } from "@clerk/react";
 import toast from "react-hot-toast";
-import api from "../api/axios";
+import api from "../api/axios.js";
 
 const StoriesBar = () => {
   const { getToken } = useAuth();

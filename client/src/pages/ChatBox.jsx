@@ -4,8 +4,8 @@ import { Image, SendHorizonal, SendIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useAuth } from "@clerk/react";
-import api from "../api/axios";
-import { addMessages, fetchMessages, resetMessages } from "../features/messages/messagesSlice";
+import api from "../api/axios.js";
+import { addMessages, fetchMessages, resetMessages } from "../features/messages/messagesSlice.js";
 import toast from "react-hot-toast";
 
 const ChatBox = () => {

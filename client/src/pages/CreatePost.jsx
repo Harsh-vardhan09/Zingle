@@ -5,7 +5,7 @@ import toast, {} from 'react-hot-toast'
 import { useSelector } from "react-redux";
 import { useAuth } from "@clerk/react";
 import { useNavigate } from "react-router-dom";
-import api from "../api/axios";
+import api from "../api/axios.js";
 
 
 const CreatePost = () => {

@@ -9,7 +9,7 @@ import ProfileModal from '../components/ProfileModal';
 import { useSelector } from 'react-redux';
 import { useAuth } from '@clerk/react';
 import toast from 'react-hot-toast';
-import api from '../api/axios';
+import api from '../api/axios.js';
 
 const Profile = () => {
   

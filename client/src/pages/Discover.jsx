@@ -3,11 +3,11 @@ import { dummyConnectionsData } from "../assets/assets";
 import { Search } from "lucide-react";
 import UserCard from "../components/UserCard";
 import Loading from "../components/Loading";
-import api from "../api/axios";
+import api from "../api/axios.js";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/react";
 import { useDispatch } from "react-redux";
-import { fetchUser } from "../features/user/userSlice";
+import { fetchUser } from "../features/user/userSlice.js";
 
 
 const Discover = () => {
