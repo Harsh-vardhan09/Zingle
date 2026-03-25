@@ -23,76 +23,24 @@
 - MongoDB
 - CLOUDINARY
 - CORS
-
+- Image Kit
+- Clerk/Express
+- NodeMailer
 
 
 ---
 ## 📂 Project Structure
 
-#### *Client*
 ```bash
-Zingle/
+Zingle/ # MERN full stack social media
 │
-├── client/        # Frontend (React + Vite + tailwind)
-│   ├── src/
-│   │   ├── assets/       # Images, icons, Constatants
-|	|   |    └── assets.js
-|   |   |            
-│   │   ├── components/   
-|   |   |    ├── Loading.jsx
-|	|   |    ├── MenuItem.jsx
-|   |   |    ├── SideBar.jsx
-|   |   |    ├── StoriesBar.jsx
-|   |   |    ├──
-|   |   |    ├──
-|   |   |    └── MenuItems.jsx
-|   |   |     
-│   │   ├── pages/       
-|   |   |   ├── index.js
-|   |   |   ├── ChatBox.jsx
-|   |   |   ├── Connections.jsx
-|   |   |   ├── Discover.jsx
-|   |   |   ├── Feed.jsx
-|   |   |   ├── Layout.jsx
-|   |   |   ├── Login.jsx
-|   |   |   ├── Messages.jsx
-|   |   |   ├── Profile.jsx
-|   |   |   └── CreatePost.jsx
-|   |   |
-│   │   ├── utils/        # using functions
-|   |   |   └── Index.js
-|   |   |
-│   │   ├── constants/    
-|   |   |   └──index.js # Static values
-|   |   |   
-│   │   ├── App.jsx
-|   |   ├── .env      # env variable for clerck
-│   │   └── main.jsx
-│
-```
-#### *Server*
-```bash
+├──  client/        # Frontend (React + Vite + tailwind)
+│   
+├──  server/         # Backend (Node,Express,MongoDB,Clerk)
 |
-├── server/
-|   |
-|   ├── mongodb
-|   |    |
-|   |    ├── models
-|   |    |   ├──   # dummy data
-|   |    |   └──   #  mongoose Schema
-|   |    └──    # mongoDb connect
-|   |  
-|   ├── routes
-|   |    ├── 
-|   |    └── 
-|   |
-|   ├── index.js   # main server
-|   |
-│   └── package.json
-│
-├──.gitignore
-└── README.md
-
+├──  Package.json
+├──  README.md
+├── .gitignore
 ```
 
 ---
@@ -118,9 +66,27 @@ onClick={()=>toast.promise(handleCreateStory(),{
         })}
 ```
 
+#### REDUX:
+- using  it for state management and api call 
+### *Server*
+
+#### Inngest:
+- this helps in batch processing, queue and background jobs and cron jobs
+
+#### Clerk/express:
+- This is used for auth update of the user in the backend 
+#### ImageKit:
+- This is an tool to turn the iamge into url change its size type and other things to use
+
+#### Nodemailer:
+- Nodemailer is the most popular email sending library for Node.js. It makes sending emails straightforward and secure, with zero runtime dependencies to manage.
+
 ---
 
-#### Important:-
+### Important:-
+
+#### *Client*
+
 - *Here the `media.type` is the MIME type it can be anything image video null. `?` allows if it null it doesn't crash.*
 - *If the mime type starts with image like `image/png` , `image/jpeg` it gives true.*
 ```jsx
@@ -135,6 +101,58 @@ onClick={()=>toast.promise(handleCreateStory(),{
             ))
 ```
 
+- we use regex to transform the input to the html format we want
+	`post.content.replace(/(#\w+)/g,'<span class="text-indigo-600">$1</span>')`
+- We use `dangerouslySetHTML` to use it. Its called dangerous because it can cause XSS(Cross scripting attack).
+
+- In JavaScript, the parameters of `.map()` **must be in the correct order**.
+- So the **first parameter is the element (your `message`)**, and the **second is the index**.
+```jsx
+messages.map((message, index) => (
+  <Link key={index} className='flex items-start gap-2 py-2 hover:bg-slate-100'>
+    <img src={message.from_user_id.profile_picture} alt="" className='w-8 h-8 rounded-full'/>
+  </Link>
+))
+```
+- Now the variables are **swapped**:
+	- `index` = actually the **message object**
+	- `message` = actually the **number index**
+*so this gives error since the messages have (1,2,3,...)*
+*Here the index is assigned by JS itself.*
+
+
+### *Server*
+#### INNGEST error:
+
+- *There was an problem in connecting INNGEST  to the clerk clerk was sending the sessions but the INNGEST was not holding a trigger to it due  to  naming and writing technique*
+- *Used Triggers keyword for the trigger , Renamed id to hard refresh it make sure the naming of the old is changed and the triggers are added in each of the path.*
+- *After the triggers are visible in the apps and the events the events start working.*
+
+#### Image Kit:
+- *Its documentation has changed and we don't need to create a separate file for its env it pulls it directly from there*
+- *There the path is changed to the source*
+- ***What is `src` (or old `path`) actually?
+> 	the relative path of your file inside ImageKit storage***
+
+
+#### Inngest CRON:
+- *You can create scheduled jobs using cron schedules within Inngest natively. Inngest's cron schedules also support timezones, allowing you to schedule work in whatever timezone you need work to run in.*
+
+```js
+const sendNotificationOfUnseenMessages = inngest.createFunction(
+  {
+    id: "send-unseen-messages-notification",
+    triggers: { cron: "TZ+America/New_York 0 9 * * *" },//everyday at 9 AM
+  },
+  async (params) => {},
+);
+```
+
 ---
+
 #### Author
 *Aarsh-HV*
+
+
+
+  
