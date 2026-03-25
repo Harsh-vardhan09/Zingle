@@ -16,7 +16,7 @@ const client = new ImageKit({
 export const addUserStory = async (req, res) => {
   try {
     const { userId } = req.auth();
-    const { content, media_type } = req.body;
+    const { content, media_type,background_color } = req.body;
     const media=req.file;
 
     let media_url=''

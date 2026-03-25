@@ -13,7 +13,7 @@ const storySchema=new mongoose.Schema({
     media_type:{type:String,enum:['text','image','video']},
     view_count:[{type:String,ref:'user'}],
     background_color:{type:String}
-},{timestamp:true,minimize:false})
+},{timestamps:true,minimize:false})
 
 const Story=mongoose.model('Story',storySchema);
 

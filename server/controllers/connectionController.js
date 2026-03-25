@@ -48,7 +48,7 @@ export const sendConnectionRequest = async (req, res) => {
         success: true,
         message: "Connection request sent",
       });
-    } else if (connection && connecction.status === "accepted") {
+    } else if (connection && connection.status === "accepted") {
       return res.json({
         success: false,
         message: "You are already connected with this user",

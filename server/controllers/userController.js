@@ -24,7 +24,7 @@ export const getUserData = async (req, res) => {
     }
     return res.json({
       success: true,
-      message: user,
+      user,
     });
   } catch (error) {
     console.log(error);

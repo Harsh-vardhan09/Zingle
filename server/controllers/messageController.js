@@ -102,10 +102,10 @@ export const getChatMessage = async (req, res) => {
     const { userId } = req.auth();
     const { to_user_id } = req.body;
 
-    const message = await Message.find({
+    const messages = await Message.find({
       $or: [
         { from_user_id: userId, to_user_id },
-        { from_user_id: userId, to_user_id: userId },
+        { from_user_id:to_user_id, to_user_id: userId },
       ],
     }).sort({ createdAt: -1 });
 
@@ -117,7 +117,7 @@ export const getChatMessage = async (req, res) => {
 
     res.json({
       success: true,
-      message,
+      messages,
     });
   } catch (error) {
     console.log(error);
@@ -134,7 +134,7 @@ export const getUserRecentMessages = async (req, res) => {
     const messages = await Message.find({
       to_user_id: userId,
     })
-      .populate("from_user_di to_user_id")
+      .populate("from_user_id to_user_id")
       .sort({ createdAt: -1 });
 
      res.json({

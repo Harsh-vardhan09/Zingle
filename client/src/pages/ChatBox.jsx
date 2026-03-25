@@ -1,19 +1,83 @@
 import React, { useEffect, useRef, useState } from "react";
 import { dummyMessagesData, dummyUserData } from "../assets/assets";
 import { Image, SendHorizonal, SendIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useAuth } from "@clerk/react";
+import api from "../api/axios";
+import { addMessages, fetchMessages, resetMessages } from "../features/messages/messagesSlice";
+import toast from "react-hot-toast";
 
 const ChatBox = () => {
-  const messages = dummyMessagesData;
+  const {messages} = useSelector((state)=>state.messages);
+  // console.log("this is messages ",messages)
+  const {userId}=useParams();
+  const {getToken}=useAuth();
+  const dispatch=useDispatch()
+
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
-  const [user, setUser] = useState(dummyUserData);
-
+  const [user, setUser] = useState(null);
   const messageEndRef = useRef(null);
-  const sendMessage = async () => {};
+
+  const connections=useSelector((state)=>state.connections.connections)
+
+  const fetchUserMessages=async()=>{
+    try {
+      const token=await getToken();
+      dispatch(fetchMessages({token,userId}))
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+  }
+
+
+  const sendMessage = async () => {
+    try {
+      if(!text && !image) return 
+      // console.log('clicked')
+      const token=await getToken();
+      const formData=new FormData();
+
+      formData.append('to_user_id',userId)
+      formData.append('text',text)
+      image && formData.append('image',image)
+
+      const {data}=await api.post('/api/message/send',formData,{
+        headers:{Authorization:`Bearer ${token}`}
+      })
+      if(data.success){
+        setText('')
+        setImage(null)
+        dispatch(addMessages(data.message))
+      }else{
+        throw new Error(data.message)
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+  };
+
+  useEffect(() => {
+    fetchUserMessages()
+    return ()=>{
+      dispatch(resetMessages)
+    }
+  }, [userId]);
+
+  useEffect(()=>{
+    if(connections.length>0){
+      const user=connections.find(connection=>connection._id===userId)
+      setUser(user)
+    }
+  },[connections,userId])
 
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
 
   return (
     user && (

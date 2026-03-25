@@ -2,14 +2,14 @@ import { Link, useNavigate } from "react-router-dom"
 import { assets, dummyUserData } from "../assets/assets"
 import MenuItems from "./MenuItems";
 import { CirclePlus, LogOut} from "lucide-react";
-import {UserButton,useClerk} from '@clerk/react'
+import {SignOutButton, UserButton,useClerk} from '@clerk/react'
+import { useSelector } from "react-redux";
 
 const Sidebar = ({sidebarOpen,setSidebarOpen}) => {
     const navigate=useNavigate();
-    const user=dummyUserData;
-    const {signOut} =useClerk;
+    const user=useSelector((state)=>state.user.value);
   return (
-    <section className={`bg-white w-60 xl:w-72 border-r border-gray-200 flex flex-col justify-between items-center max-sm:absolute top-0 bottom-0 z-20 ${sidebarOpen?'translate-x-0':'max-sm:translate-x-full'} transition-all duration-300 ease-in-out`}>
+    <section className={`bg-white w-60 xl:w-72  border-r border-gray-200 flex flex-col justify-between items-center max-sm:absolute top-0 bottom-0 z-20 ${sidebarOpen?'translate-x-0':'max-sm:-translate-x-full'} transition-all duration-300 ease-in-out`}>
         <div className="w-full">
             <img src={assets.Logo} alt="" className="w-30 m-7 my-2 " onClick={()=>navigate('/')} />
             <hr className="border-gray-300 mb-8"/>
@@ -30,7 +30,9 @@ const Sidebar = ({sidebarOpen,setSidebarOpen}) => {
                 <p className="text-xs text-gray-500">@{user.username}</p>
               </div>
             </div>
-            <LogOut  onClick={signOut} className="w-4.5 textgray-400 hover:text-gray-700 transition cursor-pointer"/>
+            <SignOutButton> 
+              <LogOut   className="w-4.5 textgray-400 hover:text-gray-700 transition cursor-pointer"/>
+            </SignOutButton>
           </div>
     </section>
   )
