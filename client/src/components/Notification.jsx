@@ -1,6 +1,6 @@
-import React from "react";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Notification = ({ t, message }) => {
   const navigate = useNavigate();
@@ -24,10 +24,15 @@ const Notification = ({ t, message }) => {
         </div>
       </div>
       <div className="flex border-l border-gray-200">
-        <button onClick={()=>{
+        <button
+          onClick={() => {
             navigate(`/messages/${message.from_user_id._id}`);
-            toast.dismiss(t.id)
-        }} className="p-4 text-indigo-600 font-semibold">Reply</button>
+            toast.dismiss(t.id);
+          }}
+          className="p-4 text-indigo-600 font-semibold"
+        >
+          Reply
+        </button>
       </div>
     </section>
   );

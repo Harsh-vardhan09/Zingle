@@ -1,12 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import api from "../../api/axios.js";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import api from '../../api/axios.js';
 
 const initialState = {
   messages: [],
 };
 
 export const fetchMessages = createAsyncThunk(
-  "messages/fetchMessages",
+  'messages/fetchMessages',
   async ({ token, userId }) => {
     const { data } = await api.post(
       `/api/message/get`,
@@ -16,14 +16,13 @@ export const fetchMessages = createAsyncThunk(
       },
     );
     // console.log("this fuction is working");
-    
+
     return data.success ? data : null;
-    
   },
 );
 
 const messagesSlice = createSlice({
-  name: "messages",
+  name: 'messages',
   initialState,
   reducers: {
     setMessages: (state, action) => {

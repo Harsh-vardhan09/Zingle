@@ -1,12 +1,12 @@
-import { Plus } from "lucide-react";
-import { useEffect, useState } from "react";
-import { dummyStoriesData } from "../assets/assets";
-import moment from "moment";
-import StoryModal from "./StoryModal";
-import StoryViewer from "./StoryViewer";
-import { useAuth } from "@clerk/react";
-import toast from "react-hot-toast";
-import api from "../api/axios.js";
+import { Plus } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { dummyStoriesData } from '../assets/assets';
+import moment from 'moment';
+import StoryModal from './StoryModal';
+import StoryViewer from './StoryViewer';
+import { useAuth } from '@clerk/react';
+import toast from 'react-hot-toast';
+import api from '../api/axios.js';
 
 const StoriesBar = () => {
   const { getToken } = useAuth();
@@ -15,11 +15,10 @@ const StoriesBar = () => {
   const [showModal, setShowModal] = useState(false);
   const [viewStory, setViewStory] = useState(null);
 
-  
   const fetchStories = async () => {
     try {
       const token = await getToken();
-      const { data } = await api.get("/api/story/get", {
+      const { data } = await api.get('/api/story/get', {
         headers: { Authorization: `Bearer ${token}` },
       });
       // console.log(token);
@@ -74,9 +73,9 @@ const StoriesBar = () => {
             <p className="text-white absolute bottom-1 right-2 z-10 text-xs">
               {moment(story.createdAt).fromNow()}
             </p>
-            {story.media_type !== "text" && (
+            {story.media_type !== 'text' && (
               <div className="absolute inset-0 z-1 rounded-lg bg-black overflow-hidden">
-                {story.media_type === "image" ? (
+                {story.media_type === 'image' ? (
                   <img
                     src={story.media_url}
                     alt=""
