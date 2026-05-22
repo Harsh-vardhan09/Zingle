@@ -10,7 +10,7 @@ import { fetchConnections } from './features/connections/connectionSlice.js';
 import { useRef } from 'react';
 import { addMessages } from './features/messages/messagesSlice.js';
 import Notification from './components/Notification.jsx';
-
+import { socket } from './socket.js';
 
 const App = () => {
   const {user} =useUser();
@@ -35,27 +35,33 @@ const App = () => {
   
   useEffect(()=>{
     pathNameRef.current=pathname
-  },[pathNameRef])
+  },[pathname])
 
   useEffect(()=>{
     if(user){
-      const eventSource=new EventSource(import.meta.env.VITE_BASEURTL+'/api/message/'+user._id);
-      eventSource.onmessage=(event)=>{
-        const message=JSON.parse(event.data)
+      socket.connect();
+      socket.emit('joinroom', user._id);
 
-        if(pathNameRef.current===('/message'+message.from_user_id._id)){
-          dispatch(addMessages(message))
-        }else{
-          toast.custom((t)=>(
-            <Notification t={t} message={message}/>
-          ),{position:'bottom-right'})
+      const handleNewMessage = (message) => {
+        // Fix for route checking: /messages/ instead of /message
+        if (pathNameRef.current === ('/messages/' + message.from_user_id._id)) {
+          dispatch(addMessages(message));
+        } else {
+          toast.custom((t) => (
+            <Notification t={t} message={message} />
+          ), { position: 'bottom-right' });
         }
-        return ()=>{
-          eventSource.close()
-        }
-      }
+      };
+
+      socket.on('newMessage', handleNewMessage);
+
+      return () => {
+        socket.emit('leaveroom', user._id);
+        socket.off('newMessage', handleNewMessage);
+        socket.disconnect();
+      };
     }
-  },[])
+  },[user, dispatch])
 
   return (
     <>

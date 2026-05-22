@@ -7,51 +7,49 @@ import { useAuth } from "@clerk/react";
 import api from "../api/axios.js";
 import { addMessages, fetchMessages, resetMessages } from "../features/messages/messagesSlice.js";
 import toast from "react-hot-toast";
-
 const ChatBox = () => {
-  const {messages} = useSelector((state)=>state.messages);
+  const { messages } = useSelector((state) => state.messages);
   // console.log("this is messages ",messages)
-  const {userId}=useParams();
-  const {getToken}=useAuth();
-  const dispatch=useDispatch()
+  const { userId } = useParams();
+  const { getToken } = useAuth();
+  const dispatch = useDispatch()
 
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
   const [user, setUser] = useState(null);
   const messageEndRef = useRef(null);
 
-  const connections=useSelector((state)=>state.connections.connections)
+  const connections = useSelector((state) => state.connections.connections)
 
-  const fetchUserMessages=async()=>{
+  const fetchUserMessages = async () => {
     try {
-      const token=await getToken();
-      dispatch(fetchMessages({token,userId}))
+      const token = await getToken();
+      dispatch(fetchMessages({ token, userId }))
     } catch (error) {
       console.log(error);
       toast.error(error.message)
     }
   }
 
-
   const sendMessage = async () => {
     try {
-      if(!text && !image) return 
+      if (!text && !image) return
       // console.log('clicked')
-      const token=await getToken();
-      const formData=new FormData();
+      const token = await getToken();
+      const formData = new FormData();
 
-      formData.append('to_user_id',userId)
-      formData.append('text',text)
-      image && formData.append('image',image)
+      formData.append('to_user_id', userId)
+      formData.append('text', text)
+      image && formData.append('image', image)
 
-      const {data}=await api.post('/api/message/send',formData,{
-        headers:{Authorization:`Bearer ${token}`}
+      const { data } = await api.post('/api/message/send', formData, {
+        headers: { Authorization: `Bearer ${token}` }
       })
-      if(data.success){
+      if (data.success) {
         setText('')
         setImage(null)
         dispatch(addMessages(data.message))
-      }else{
+      } else {
         throw new Error(data.message)
       }
     } catch (error) {
@@ -62,17 +60,17 @@ const ChatBox = () => {
 
   useEffect(() => {
     fetchUserMessages()
-    return ()=>{
-      dispatch(resetMessages)
+    return () => {
+      dispatch(resetMessages())
     }
   }, [userId]);
 
-  useEffect(()=>{
-    if(connections.length>0){
-      const user=connections.find(connection=>connection._id===userId)
+  useEffect(() => {
+    if (connections.length > 0) {
+      const user = connections.find(connection => connection._id === userId)
       setUser(user)
     }
-  },[connections,userId])
+  }, [connections, userId])
 
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -132,7 +130,7 @@ const ChatBox = () => {
             />
             <label htmlFor="image">
               {image ? (
-                <img src={URL.createObjectURL(image)} className="h-8 rounded "/>
+                <img src={URL.createObjectURL(image)} className="h-8 rounded " />
               ) : (
                 <Image className="size-7 text-gray-400 cursor-pointer mr-2" />
               )}

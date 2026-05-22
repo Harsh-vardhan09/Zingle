@@ -8,35 +8,6 @@ const client = new ImageKit({
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
 });
 
-// create an empty object to store server side event connections
-const connections = {};
-
-//controller function for SERVER SIDE Event endpoint
-export const sseController = (req, res) => {
-  const { userId } = req.params;
-  console.log("new client connected", userId);
-
-  //set server side headers
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection-Control", "keep-alive");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-
-  //Add the client response object to the connection object
-  connections[userId] = res;
-
-  // send an initial event to the client
-  res.write("log:connected to sse stream\n\n");
-
-  //handle client disconnection
-  req.on("close", () => {
-    //remove the client response object from the connections array
-    delete connections[userId];
-
-    console.log("client disconnected");
-  });
-};
-
 //send message
 
 export const sendMessage = async (req, res) => {
@@ -76,16 +47,15 @@ export const sendMessage = async (req, res) => {
 
     res.json({ success: true, message });
 
-    //send message to to_user_id using sse
+    //send message to to_user_id using WebSockets
 
     const messageWithUserData = await Message.findById(message._id).populate(
       "from_user_id",
     );
 
-    if (connections[to_user_id]) {
-      connections[to_user_id].write(
-        `data:${JSON.stringify(messageWithUserData)}\n\n`,
-      );
+    const io = req.app.get('io');
+    if (io) {
+      io.to(to_user_id).emit('receiveMessage', messageWithUserData);
     }
   } catch (error) {
     console.log(error);

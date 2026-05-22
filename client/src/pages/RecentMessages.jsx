@@ -31,7 +31,7 @@ const RecentMessages = () => {
 
             //sort messages by data
             const sortedMessages=Object.values(groupedMessages).sort((a,b)=>{
-                new Date(b.createdAt)-new Date(a.createdAt)
+                return new Date(b.createdAt)-new Date(a.createdAt)
             })
             setMessages(sortedMessages);
         }else{
@@ -47,8 +47,8 @@ const RecentMessages = () => {
     useEffect(()=>{
         if(user){
             fetchRecentMessages()
-            setInterval(fetchRecentMessages(),30000)
-            return ()=>{clearInterval()}
+            const intervalId = setInterval(fetchRecentMessages, 30000)
+            return ()=>{clearInterval(intervalId)}
         }
         
     },[user])
