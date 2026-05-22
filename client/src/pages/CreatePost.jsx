@@ -1,53 +1,56 @@
-import { useState } from "react";
-import { dummyUserData } from "../assets/assets";
-import { Image, X } from "lucide-react";
-import toast, {} from 'react-hot-toast'
-import { useSelector } from "react-redux";
-import { useAuth } from "@clerk/react";
-import { useNavigate } from "react-router-dom";
-import api from "../api/axios.js";
-
+import { useState } from 'react';
+import { dummyUserData } from '../assets/assets';
+import { Image, X } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+import { useAuth } from '@clerk/react';
+import { useNavigate } from 'react-router-dom';
+import api from '../api/axios.js';
 
 const CreatePost = () => {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const { getToken } = useAuth();
+  const user = useSelector((state) => state.user.value);
+  const navigate = useNavigate();
 
-  const {getToken}=useAuth();
-  const user = useSelector((state)=>state.user.value);
-  const navigate=useNavigate();
-
-  const handleSubmit=async()=>{
-    if(!images.length && !content){
-      return toast.error("Please add image or content")
+  const handleSubmit = async () => {
+    if (!images.length && !content) {
+      return toast.error('Please add image or content');
     }
     setLoading(true);
-    const postType=images.length && content?'text_with_images':images.length?"images":'text';
-    
+    const postType =
+      images.length && content
+        ? 'text_with_images'
+        : images.length
+          ? 'images'
+          : 'text';
+
     try {
-      const formData=new FormData();
-      formData.append('content',content)
-      formData.append('post_type',postType)
-      images.map((image)=>{
-        formData.append('images',image)
-      })
-      const token=await getToken()
-      const {data}=await api.post('/api/post/add',formData,{
-        headers:{Authorization:`Bearer ${token}`}
-      })
-      if(data.success){
-        navigate('/')
-      }else{
-          console.log(data.message)
-          throw new Error(data.message)
+      const formData = new FormData();
+      formData.append('content', content);
+      formData.append('post_type', postType);
+      images.map((image) => {
+        formData.append('images', image);
+      });
+      const token = await getToken();
+      const { data } = await api.post('/api/post/add', formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (data.success) {
+        navigate('/');
+      } else {
+        console.log(data.message);
+        throw new Error(data.message);
       }
     } catch (error) {
-      console.log(error.message)
-      toast(error.message)
-      throw new error(error.message)
+      console.log(error.message);
+      toast(error.message);
+      throw new error(error.message);
     }
-  }
+  };
 
   return (
     <section className="min-h-screen bg-linear-to-b from-slate-50 to-white">
@@ -82,29 +85,55 @@ const CreatePost = () => {
             placeholder="What's happening"
             className="w-full resize-none max-h-20 mt-4 text-sm outline-none placeholder-gray-400"
           />
-          {images.length > 0 && <div className="flex flex-wrap gap-2">{
-          images.map((image,index)=>(
-              <div key={index} className="relative group">
-                  <img src={URL.createObjectURL(image)} className="h-20 rounded-md" />
-                  <div onClick={()=>setImages(images.filter((_,i)=>i!==index))} className="absolute hidden group-hover:flex justify-center items-center top-0 right-0 bottom-0 left-0 bg-black/40 rounded-md cursor-pointer">
-                    <X className="w-6 h-6 text-white"/>
+          {images.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {images.map((image, index) => (
+                <div key={index} className="relative group">
+                  <img
+                    src={URL.createObjectURL(image)}
+                    className="h-20 rounded-md"
+                  />
+                  <div
+                    onClick={() =>
+                      setImages(images.filter((_, i) => i !== index))
+                    }
+                    className="absolute hidden group-hover:flex justify-center items-center top-0 right-0 bottom-0 left-0 bg-black/40 rounded-md cursor-pointer"
+                  >
+                    <X className="w-6 h-6 text-white" />
                   </div>
-              </div>
-          ))
-          }</div>}
+                </div>
+              ))}
+            </div>
+          )}
           {/* Bottom bar */}
           <div className="flex items-center justify-between pt-3 border-t  border-gray-300">
-             <label htmlFor="images" className="flex items-center gap-2 text-sm  text-gray-500 hover:text-gray-700 transition cursor-pointer">
-              <Image className="size-6"/>
-             </label>
-             <input type="file" id="images" accept="image/*" hidden multiple onChange={(e)=>setImages([...images,...e.target.files])}/>
-             <button disabled={loading}  onClick={()=>toast.promise(
-              handleSubmit,
-              {loading:'uploading ...',
-                success:<p>post added</p>,
-                error:<p>Post not added</p>
+            <label
+              htmlFor="images"
+              className="flex items-center gap-2 text-sm  text-gray-500 hover:text-gray-700 transition cursor-pointer"
+            >
+              <Image className="size-6" />
+            </label>
+            <input
+              type="file"
+              id="images"
+              accept="image/*"
+              hidden
+              multiple
+              onChange={(e) => setImages([...images, ...e.target.files])}
+            />
+            <button
+              disabled={loading}
+              onClick={() =>
+                toast.promise(handleSubmit, {
+                  loading: 'uploading ...',
+                  success: <p>post added</p>,
+                  error: <p>Post not added</p>,
+                })
               }
-             )} className="text-sm bg-linear-to-r from-indigo-500 to-purple-600 hover:to-purple-700 active:scale-95 transition text-white font-medium px-8 py-2 rounded-md cursor-pointer">Publish Post</button>
+              className="text-sm bg-linear-to-r from-indigo-500 to-purple-600 hover:to-purple-700 active:scale-95 transition text-white font-medium px-8 py-2 rounded-md cursor-pointer"
+            >
+              Publish Post
+            </button>
           </div>
         </div>
       </div>

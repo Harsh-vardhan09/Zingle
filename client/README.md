@@ -7,23 +7,23 @@ Zingle/
 │   ├── src/
 │   │   ├── assets/       # Images, icons, Constatants
 |	|   |    └── assets.js
-|	|   | 
-|	|   | 
+|	|   |
+|	|   |
 │   │   ├── api/       # redux store for storing the reducers
 |	|   |    └── store.js
-|   |   |   
+|   |   |
 │   │   ├── app/       # axios file for calling base url
 |	|   |    └── axios.js
-|	|   | 
-│   │   ├── features/  
-|   |   |     ├── user/ 
+|	|   |
+│   │   ├── features/
+|   |   |     ├── user/
 |	|   |     |     └──userSlice.js # redux actions reducer file
-|   |   |     ├── connections /   
+|   |   |     ├── connections /
 |   |   |     |       └── connectionSlice.js
 |   |   |     ├── message/
 |   |   |           └── messageSlice.js
-|   |   |    
-│   │   ├── components/   
+|   |   |
+│   │   ├── components/
 |   |   |    ├── Loading
 |	|   |    ├── MenuItem
 |   |   |    ├── SideBar
@@ -35,8 +35,8 @@ Zingle/
 |   |   |    ├── UserProfile
 |   |   |    ├── Notification
 |   |   |    └── MenuItems
-|   |   |     
-│   │   ├── pages/       
+|   |   |
+│   │   ├── pages/
 |   |   |   ├── index.js
 |   |   |   ├── ChatBox
 |   |   |   ├── Connections
@@ -48,9 +48,9 @@ Zingle/
 |   |   |   ├── Profile
 |   |   |   └── CreatePost
 |   |   |
-│   │   ├── constants/    
+│   │   ├── constants/
 |   |   |   └──index.js # Static values
-|   |   |   
+|   |   |
 │   │   ├── App.jsx
 |   |   ├── .env      # env variable for clerck
 │   │   └── main.jsx
